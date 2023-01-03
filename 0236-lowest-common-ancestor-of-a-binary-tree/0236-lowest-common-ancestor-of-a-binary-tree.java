@@ -23,8 +23,8 @@ class Solution {
         }
         
         
-        TreeNode left = find(root.right , p , q);
-        TreeNode right = find(root.left , p , q);
+        TreeNode left = find(root.left , p , q);
+        TreeNode right = find(root.right , p , q);
         
         if(left == null){
             
