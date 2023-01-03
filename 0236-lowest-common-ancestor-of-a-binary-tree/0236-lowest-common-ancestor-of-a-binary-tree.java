@@ -8,66 +8,36 @@
  * }
  */
 class Solution {
-    
-    public boolean find(TreeNode root ,TreeNode sol ,ArrayList<TreeNode> ans){
-        if(root == null){
-            return false;
-        }
-        ans.add(root);
-        
-        if(root.val == sol.val){
-            
-            return true;
-            
-        }
-     
-        if(find(root.left , sol , ans) || find(root.right , sol ,ans)){
-            return true;
-        }
-        
-        int sizes = ans.size() - 1;
-        ans.remove(sizes);
-        return false;
-        
-    }
-    
-    
-    
-    
-    
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         
-        if(root == null){
-            return null;
-        }
-        if(p == null && q != null){
-            return q;
-        }
-        if(q == null && p != null){
-            return p;
-        }
+        return find(root , p , q);
         
-        
-       ArrayList<TreeNode> ans1 = new ArrayList<>();
-        ArrayList<TreeNode> ans2 = new ArrayList<>();
-        
-        
-        find(root , p , ans1 );
-        find(root , q , ans2);
-        TreeNode ans = null;
-for(int i = 0 ; i < ans1.size(); i++){
-    for(int j = 0; j < ans2.size(); j++){
-        
-        if(ans1.get(i) == ans2.get(j)){
-            ans = ans1.get(i);
-        }
         
     }
-}
+    
+    
+    public TreeNode find(TreeNode root, TreeNode p, TreeNode q){
+        
+        if(root == null || root == p || root == q){
+            return root;
+        }
         
         
+        TreeNode left = find(root.right , p , q);
+        TreeNode right = find(root.left , p , q);
         
-        return ans;
+        if(left == null){
+            
+            return right;
+        }else if(right == null){
+            
+            return left;
+        }else{
+            return root;
+        }
+        
+        
         
     }
+    
 }
