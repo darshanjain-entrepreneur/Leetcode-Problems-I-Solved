@@ -9,34 +9,23 @@
  */
 
 class Solution {
-    
-    public TreeNode find(TreeNode root , TreeNode p , TreeNode q){
-        if(root == null || root == p || root == q){
-            return root;
-        }
-        
-        TreeNode left = find(root.left , p , q);
-        TreeNode right = find(root.right , p , q);
-        
-        if(left == null){
-            return right;
-        }else if(right == null){
-            return left;
-        }else{
-            return root;
-        }
-        
-        
-        
-    }
-    
-    
-    
-    
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         
+        if(root == null){
+            return null;
+        }
         
         
-        return find(root , p , q);
+        int ans = root.val;
+        if(ans < p.val && ans < q.val){
+           return lowestCommonAncestor(root.right ,  p,  q);
+            
+        }
+        
+        if(ans > p.val && ans > q.val){
+           return  lowestCommonAncestor(root.left , p , q);
+        }
+        
+        return root;
     }
 }
