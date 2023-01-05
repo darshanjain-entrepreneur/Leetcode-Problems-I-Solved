@@ -14,7 +14,7 @@
  * }
  */
 class Solution {
-  int count = 0;
+int count = 0;
 int result = Integer.MIN_VALUE;
 
 public int kthSmallest(TreeNode root, int k) {
@@ -26,7 +26,10 @@ public void traverse(TreeNode root, int k) {
     if(root == null) return;
     traverse(root.left, k);
     count ++;
-    if(count == k) result = root.val;
+    if(count == k) {
+        result = root.val;
+        return;
+    }
     traverse(root.right, k);       
 }
 }
