@@ -5,11 +5,11 @@ class Solution {
         
         
         
-        int dp[][] = new int[n][m];
+        int prev[] = new int[n];
         
         for(int i = 0 ; i  < m; i++){
             
-            dp[n-1][i] = triangle.get(n-1).get(i);
+            prev[i] = triangle.get(n-1).get(i);
             
             
         }
@@ -17,22 +17,24 @@ class Solution {
         
         for(int i = n -2 ; i >= 0; i--){
             
+            int cur[] = new int[n];
+            
             for(int j = i ; j >= 0; j--){
                 
-                int down = triangle.get(i).get(j) + dp[i + 1][j];
+                int down = triangle.get(i).get(j) + prev[j];
                 
-                int up = triangle.get(i).get(j) + dp[i + 1][j + 1];
+                int up = triangle.get(i).get(j) + prev[j + 1];
                 
-                dp[i][j] = Math.min(down , up);
+                cur[j] = Math.min(down , up);
                 
             }
             
-            
+            prev = cur;
             
         }
         
         
-        return dp[0][0];
+        return prev[0];
         
         
     }
