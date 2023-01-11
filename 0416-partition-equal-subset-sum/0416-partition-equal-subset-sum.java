@@ -1,57 +1,39 @@
 class Solution {
     
-    public boolean find(int nums[] , int i ,int  target , int dp[][]){
-        if(target == 0){
-            return true;
-        }
-        if(i == 0){
-            return nums[i] == target;
-        }
-        
-        if(dp[i][target] != -1){
-            if(dp[i][target] == 1){
-                return true;
-            }else{
-                return false;
-            }
-            
-        }
-        
-        
-        
-        boolean nottake = find(nums ,i - 1 , target , dp);
-        boolean take = false;
-        if(target >= nums[i]){
-            
-            take = find(nums , i - 1 , target - nums[i] , dp);
-        }
-        if(take || nottake == true){
-            dp[i][target] = 1;
-            
-        }else{
-            dp[i][target] = 0;
-        }
-        
-        return take || nottake;
-        
-    }
+ public boolean find(int nums[] , int target){
+     
+     boolean dp[][] = new boolean[nums.length][target + 1];
+     
+     for(int i = 0 ; i < nums.length; i++){
+         
+         dp[i][0] = true;
+     }
+     
+if(nums[0] <= target){
+    dp[0][nums[0]] = true;
+}
+     
+     
+     for(int i = 1 ; i < nums.length; i++){
+         
+         for(int j = 1; j < target + 1; j++){
+             
+             boolean nottake = dp[i-1][j];
+             boolean take = false;
+             if(nums[i] <= j){
+                 take = dp[i-1][j - nums[i]];
+             }
+             dp[i][j] = take || nottake;
+             
+         }
+     }
+     return dp[nums.length - 1][target];
+ }
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    public boolean canPartition(int[] nums) {
-        
-        
-        
-    
-        
+public boolean canPartition(int[] nums) {
+         
         if(nums.length == 0){
             return true;
         }
@@ -66,13 +48,13 @@ class Solution {
         if(sum % 2 != 0){
             return false;
         }else{
-                int dp[][] = new int[nums.length][(sum/2) + 1];
+               
+            int target = sum /2;
             
-            for(int rows[] : dp){
-                Arrays.fill(rows , -1);
-            }
+            return find(nums , target);
             
-            return find(nums , nums.length - 1 , sum / 2 , dp);
+            
+            
         }
         
         
