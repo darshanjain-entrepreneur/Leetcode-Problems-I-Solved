@@ -11,12 +11,12 @@ class Solution {
         int start = 0;
         int end = letters.length - 1;
         
-        while(start < end){
+        while(start <= end){
             
             int mid = (end - start)/2 + start;
             
            if(letters[mid] - 'a' > target - 'a'){
-               end = mid;
+               end = mid - 1;
            }else{
                start = mid + 1;
            }
@@ -26,7 +26,7 @@ class Solution {
             
         }
         
-        return letters[start];
+        return letters[start%n];
         
         
     }
