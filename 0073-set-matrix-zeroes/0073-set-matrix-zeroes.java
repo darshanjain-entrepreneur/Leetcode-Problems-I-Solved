@@ -5,41 +5,102 @@ class Solution {
         int m = matrix[0].length;
         
         
-int rows[] = new int[n];
-        int cols[] = new int[m];
         
+        
+        
+        boolean rows = false;
+        boolean cols = false;
         
         for(int i = 0; i < n; i++){
             
-            for(int j = 0; j < m; j++){
+            if(matrix[i][0] == 0){
+                cols = true;
+                break;
+            }
+            
+            
+        }
+        
+        
+        for(int j = 0; j < m; j++){
+            
+            if(matrix[0][j] == 0){
                 
+               rows = true;
+                break;
+                
+            }
+            
+            
+            
+            
+        }
+        
+      
+        
+        
+        for(int i = 1; i < n; i++){
+            
+            for(int j = 1; j < m; j++){
                 
                 if(matrix[i][j] == 0){
                     
-                    rows[i] = 1;
-                  cols[j] = 1;
-                    
+                    matrix[i][0] = 0;
+                    matrix[0][j] = 0;
                 }
-                
                 
                 
                 
             }
             
             
+            
         }
         
-        for(int i = 0; i < n; i++){
-            
-            if(rows[i] == 1){
+        
+        
+       for(int i =1; i < n; i++){
+           
+           if(matrix[i][0] == 0){
+               
+               for(int j = 0; j < m; j++){
+                   
+                   matrix[i][j] = 0;
+                   
+                   
+               }
+               
+               
+           }
+           
+           
+           
+           
+       } 
+        
+        
+        for(int j = 1; j <m; j++){
+            if(matrix[0][j] == 0){
                 
-                for(int j = 0; j < m; j++){
+                
+                for(int i = 0; i < n; i++){
+                    
                     
                     matrix[i][j] = 0;
-                    
-                    
                 }
                 
+            }
+            
+            
+            
+        }
+        
+        
+        if(cols){
+            
+            for(int i = 0; i < n; i++){
+                
+                matrix[i][0] = 0;
                 
                 
             }
@@ -49,15 +110,11 @@ int rows[] = new int[n];
             
         }
         
-        for(int i = 0; i < m; i++){
+        if(rows){
             
-            if(cols[i] == 1){
+            for(int i =0; i < m; i++){
                 
-                for(int j = 0; j < n; j++){
-                    matrix[j][i] = 0;
-                }
-                
-                
+                matrix[0][i] = 0;
             }
             
             
