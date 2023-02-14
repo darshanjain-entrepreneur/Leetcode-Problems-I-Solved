@@ -60,64 +60,63 @@ class Solution
 {
     ArrayList<Integer> commonElements(int A[], int B[], int C[], int n1, int n2, int n3) 
     {
+
+HashMap<Integer , Integer> ans = new HashMap<>();
+ArrayList<Integer> result = new ArrayList<>();
+     int i = 0;
+     int j = 0;
+     int k = 0;
      
-     HashMap<Integer , Integer> map = new HashMap<>();
-     ArrayList<Integer> answer = new ArrayList<Integer>();
-     
-     for(int i = 0; i < n1; i++){
+     while(i < n1 && j <n2 && k < n3){
          
-       if(!map.containsKey(A[i])){
-           
-           map.put(A[i] , 1);
-           
-       }
+         if(A[i] == B[j] && B[j] ==  C[k]){
+              
+              if(!ans.containsKey(A[i])){
+                  result.add(A[i]);
+                  ans.put(A[i] , 1);
+                  
+              }
+              i++;
+              j++;
+              k++;
+             
+         }else{
+             
+             
+             if(A[i] <= B[j] && A[i] <= C[k]){
+                 
+                 i++;
+                 
+             }else if(B[j] <= A[i] && B[j] <= C[k]){
+                 
+                 j++;
+                 
+             }else{
+                 
+                 
+                 k++;
+                 
+                 
+             }
+             
+             
+             
+             
+             
+             
+             
+         }
+         
          
          
          
      }
-     
-     
-     
-       for(int i = 0; i < n2; i++){
-           
-           if(map.containsKey(B[i])){
-               
-               map.put(B[i] , 2);
-               
-               
-               
-           }
-           
-           
-           
-           
-       }
-       
-   
-   for(int i = 0; i < n3; i++){
-       
-       if(map.containsKey(C[i])){
-           
-           if(map.get(C[i]) == 2){
-               
-               map.put(C[i] , 3);
-               answer.add(C[i]);
-               
-           }
-           
-           
-           
-       }
-          
-       
-       
-   }
-     
-    
-    
- return answer;
-  
-    
-       
+
+
+
+
+return result;
+
+
     }
 }
