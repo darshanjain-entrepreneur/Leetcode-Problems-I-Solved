@@ -1,6 +1,5 @@
 class Solution {
-    
- public boolean find(int nums[] , int target){
+    public boolean find(int nums[] , int target){
      
      boolean dp[][] = new boolean[nums.length][target + 1];
      
@@ -57,7 +56,7 @@ public boolean canPartition(int[] nums) {
             
         }
         
+}
         
-        
-    }
+    
 }
