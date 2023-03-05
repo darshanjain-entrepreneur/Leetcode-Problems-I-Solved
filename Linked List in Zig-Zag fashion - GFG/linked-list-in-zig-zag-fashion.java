@@ -60,8 +60,10 @@ class Solution{
        
        
       
-       Node res = head;
-       boolean flag = true;
+     Node temp = new Node(0);
+     Node res = temp;
+     boolean flag = true;
+  
        
        
        while(head != null && head.next != null){
@@ -71,15 +73,21 @@ class Solution{
                
                if(head.data <= head.next.data){
                    
-                   head = head.next;
+                temp.next = head;
+             
+                head = head.next;
+                temp = temp.next;
                    
                   
                }else{
                    
-                   int value = head.data;
-                   head.data = head.next.data;
-                   head.next.data = value;
-                       head = head.next;
+                  Node temp1 = head.next;
+                  head.next = head.next.next;
+                  temp.next = temp1;
+                  temp1 = head;
+                  temp = temp.next;
+                  
+                 
                    
                    
                }
@@ -90,16 +98,21 @@ class Solution{
                
                if(head.data >= head.next.data){
                    
-                  head  = head.next;
-                   
+                 temp.next = head;
+             
+                head = head.next;
+                temp = temp.next;
+                
+                
                    
                }else{
                    
-                   int value = head.data;
-                   head.data = head.next.data;
-                   head.next.data = value;
-                   head = head.next;
-                
+                   Node temp2 = head.next;
+                   head.next = head.next.next;
+                   temp.next = temp2;
+                   temp2.next = head;
+                   temp = temp.next;
+              
                    
                }
                
@@ -116,8 +129,9 @@ class Solution{
            
        }
        
+       temp.next = head;
        
-      return res;
+      return res.next;
        
     }
 }
