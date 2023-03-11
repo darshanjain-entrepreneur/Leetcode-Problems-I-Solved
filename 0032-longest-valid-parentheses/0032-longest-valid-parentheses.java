@@ -8,7 +8,7 @@ class Solution {
         
         int ans = 0;
         
-        Stack<Character> st = new Stack<>();
+        
         Stack<Integer> it = new Stack<>();
         it.add(-1);
         
@@ -18,22 +18,18 @@ class Solution {
             
             
             if(ch == '('){
-                st.add(ch);
+              
                 it.add(i);
             }else{
-                
-                if(!st.isEmpty()){
-                    
-                    st.pop();
-                    it.pop();
-                    ans = Math.max(ans , i - it.peek());
-                    
-                }else{
+             
+                it.pop();
+                if(it.isEmpty()){
                     
                     it.add(i);
                     
+                }else{
+                    ans = Math.max(ans , i - it.peek());
                 }
-                
                 
                 
             }
