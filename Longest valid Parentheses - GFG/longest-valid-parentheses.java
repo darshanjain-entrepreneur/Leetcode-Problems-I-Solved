@@ -31,33 +31,31 @@ class Solution{
         
       int maxi = 0;
         
-        Stack<Character> st = new Stack<>();
+      
         Stack<Integer> it = new Stack<>();
         it.add(-1);
         
        for(int i = 0; i < S.length(); i++){
            
            char ch = S.charAt(i);
-           if(ch == '('){
-               
-               st.add(ch);
-               it.add(i);
-           }else{
-               
-               if(!st.isEmpty()){
-                   
-                   st.pop();
-                   it.pop();
-                   maxi = Math.max(maxi , i - it.peek());
-                   
-                   
-               }else{
-                   it.add(i);
-               }
-               
-               
-               
-           }
+         if(ch == '('){
+             it.add(i);
+         }else{
+             
+             it.pop();
+             if(it.isEmpty()){
+                 it.add(i);
+                 
+                 
+             }else{
+                 
+                 maxi = Math.max(maxi , i - it.peek());
+                 
+             }
+             
+             
+             
+         }
            
            
        }
