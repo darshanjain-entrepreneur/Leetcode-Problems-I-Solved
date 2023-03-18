@@ -1,56 +1,49 @@
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
- */
+
 class Solution {
     public List<List<Integer>> levelOrder(TreeNode root) {
         
-        List<List<Integer>> ans = new LinkedList<>();
+        List<List<Integer>> ans = new ArrayList<>();
+        
         if(root == null){
             return ans;
         }
         
-        Queue<TreeNode> q = new LinkedList<>();
-        q.add(root);
+        Queue<TreeNode> queue = new LinkedList<>();
         
-        while(!q.isEmpty()){
+        queue.add(root);
+        
+        while(!queue.isEmpty()){
             
-            int sizes = q.size();
-            List<Integer> solve = new LinkedList<>();
+            int levelsize = queue.size();
+            List<Integer> wrap = new ArrayList<>();
             
-            for(int i = 0 ; i  < sizes; i++){
+            for(int i = 0; i < levelsize; i++){
                 
-                TreeNode hello = q.poll();
-                if(hello.left != null){
-                    q.add(hello.left);
+                if(queue.peek().left != null){
+                    queue.add(queue.peek().left);
+                }
+                if(queue.peek().right != null){
+                    queue.add(queue.peek().right);
                 }
                 
-                if(hello.right != null){
-                    q.add(hello.right);
-                }
+                wrap.add(queue.poll().val);
                 
-                solve.add(hello.val);
             }
             
-            
-            ans.add(solve);
-            
+            ans.add(wrap);
             
         }
         
         
+        
+        
+        
+        
+        
+        
         return ans;
+        
+        
         
         
     }
