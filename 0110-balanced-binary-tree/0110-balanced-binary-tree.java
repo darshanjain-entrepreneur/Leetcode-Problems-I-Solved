@@ -15,38 +15,38 @@
  */
 class Solution {
     
-    public int find(TreeNode root){
+    public int balance(TreeNode root){
+        
         if(root == null){
             return 0;
         }
         
-        int left = find(root.left);
-        if(left == -1){
-            return -1;
-        }
-        int right = find(root.right);
-        if(right == -1){
-            return -1;
-        }
+        int left = balance(root.left);
+        int right = balance(root.right);
         
+        if(left == -1 || right == -1){
+            return -1;
+        }
         if(Math.abs(left - right) > 1){
             return -1;
         }
         
-        return 1 + Math.max(left , right);
+        return 1+ Math.max(left , right);
         
         
     }
     
     
+    
     public boolean isBalanced(TreeNode root) {
         
-        if(find(root) == -1){
+        
+        int ans = balance(root);
+        if(ans == -1){
             return false;
         }else{
             return true;
         }
-        
         
     }
 }
