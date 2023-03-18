@@ -15,25 +15,28 @@
  */
 class Solution {
     
-    public int find(TreeNode root , int ans[]){
-        if(root == null){
-            return 0;
-        }
+    int ans = (int)-1e9;
+    public int maxPathSum(TreeNode root) {
         
-        int left = Math.max(0 , find(root.left , ans));
-        int right = Math.max( 0 , find(root.right , ans));
-        ans[0] = Math.max(ans[0] , left + right + root.val);
+     find(root);
+        return ans;
+        
+    }
+    
+    public int find(TreeNode root){
+        
+      if(root == null){
+          return 0;
+      }  
+        
+        
+        int left =   Math.max(0 , find(root.left));
+        int right = Math.max(0 ,find(root.right));
+        
+        ans = Math.max(ans , root.val + left + right);
+        
         return root.val + Math.max(left , right);
         
     }
     
-    public int maxPathSum(TreeNode root) {
-        
-        int ans[] = new int[1];
-        ans[0] = (int)-1e9;
-        find(root , ans);
-        return ans[0];
-        
-        
-    }
 }
