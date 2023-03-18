@@ -16,9 +16,8 @@
 class Solution {
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
         
+        
         List<List<Integer>> ans = new ArrayList<>();
-        
-        
         if(root == null){
             return ans;
         }
@@ -26,54 +25,74 @@ class Solution {
         Queue<TreeNode> queue = new LinkedList<>();
         
         queue.add(root);
+        
         boolean flag = true;
+        
         
         while(!queue.isEmpty()){
             
-            int sizes = queue.size();
-            List<Integer> result = new ArrayList<>();
-            int arr[] = new int[sizes];
+            int levelsize = queue.size();
+            List<Integer> wrap = new ArrayList<>();
+            int arr[] = new int[levelsize];
+              List<Integer> result = new ArrayList<>();
             
-            for(int i = 0 ; i < sizes; i++){
+            for(int i = 0; i < levelsize; i++){
                 
-                TreeNode sol = queue.poll();
+               TreeNode node = queue.poll();
                 if(flag){
+                    arr[i] = node.val;
+                }else{
                     
-                    arr[i] = sol.val;
-                    
-                }
-                if(!flag){
-                    
-                    arr[sizes - 1 - i] = sol.val;
+                    arr[levelsize - 1 -i] = node.val;
                     
                 }
                 
-                if(sol.left != null){
-                    queue.add(sol.left);
+                if(node.left != null){
+                    queue.add(node.left);
                 }
-                if(sol.right != null){
-                    queue.add(sol.right);
+                
+                if(node.right != null){
+                    queue.add(node.right);
                 }
+                
+                
                 
             }
             
             flag = !flag;
-          for(int i = 0 ; i < sizes; i++){
-              result.add(arr[i]);
-              
-          }
+            for(int i = 0; i< arr.length; i++){
+                
+                result.add(arr[i]);
+            }
             
             ans.add(result);
             
         }
+            
+            
+            
+       
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
         
         
         return ans;
-        
-        
         
         
         
