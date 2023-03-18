@@ -14,25 +14,59 @@
  * }
  */
 class Solution {
-    
-    public void find(List<Integer> l , TreeNode root){
-        if(root == null){
-            return;
-        }
-        
-        find(l , root.left);
-        l.add(root.val);
-        find(l , root.right);
-        
-        
-    }
-    
     public List<Integer> inorderTraversal(TreeNode root) {
         
-        List<Integer> l = new ArrayList<>();
+        List<Integer> ans = new ArrayList<>();
         
-        find(l , root);
-        return l;
+        Stack<TreeNode> st = new Stack<>();
+        if(root == null){
+            return ans;
+        }
+        
+        TreeNode node = root;
+        
+        while(true){
+            
+            if(node != null){
+                
+                st.add(node);
+             node = node.left;
+                
+                
+            }else{
+                
+                if(st.isEmpty()){
+                    
+                    break;
+                }else{
+                    
+                    
+                  node = st.pop();
+                    ans.add(node.val);
+                      node = node.right;
+                    
+                    
+                    
+                }
+                
+                
+                
+                
+                
+            }
+            
+            
+            
+            
+            
+        }
+        
+        
+        
+        
+        
+        
+        return ans;
         
         
     }
