@@ -1,45 +1,29 @@
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
- */
+
 class Solution {
-    public void find(TreeNode root , int level , List<Integer> ans){
+    
+    public void find(TreeNode root ,List<Integer> ans , int level ){
+        
         if(root == null){
             return;
         }
         
-        if(level == ans.size()){
-            
+        if(ans.size() == level){
             ans.add(root.val);
         }
         
-        find(root.right , level + 1 , ans);
-        find(root.left , level + 1 , ans);
-        
-        
+        find(root.right , ans , level + 1);
+        find(root.left , ans , level + 1);
         
     }
     
     
     
     public List<Integer> rightSideView(TreeNode root) {
+        
         List<Integer> ans = new ArrayList<>();
         
-        find(root , 0 , ans);
+        find(root , ans , 0);
         return ans;
-        
-        
         
     }
 }
