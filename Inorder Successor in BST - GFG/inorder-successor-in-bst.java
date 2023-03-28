@@ -113,23 +113,7 @@ class GfG {
 
 class Solution
 {
-    
-    public void find(Node root ,Node  x , ArrayList<Node> ans){
-        
-        if(root == null){
-            return;
-        }
-        
-        find(root.left , x , ans);
-        
-        ans.add(root);
-        find(root.right , x , ans);
-        
-        
-    }
-    
-    
-    
+   
 	public Node inorderSuccessor(Node root,Node x)
          {
          
@@ -137,31 +121,27 @@ class Solution
              return null;
          }
          
-         ArrayList<Node> ans = new ArrayList<>();
+         Node sucess = null;
          
-         find(root , x , ans);
-         
-         
-         if(ans.size() == 0){
-             return null;
-         }
-         int index = 0;
-         
-         for(int i = 0; i < ans.size(); i++){
+         while(root != null){
              
-             if(ans.get(i) == x){
+             
+             if(root.data > x.data){
                  
-                 index = i + 1;
-                 break;
+                 sucess = root;
+                 root =root.left;
+             }else{
+                 root = root.right;
              }
+             
+             
          }
          
-         if(index >= ans.size()){
-             return null;
-         }else{
-             
-             return ans.get(index);
-         }
+         
+         
+         
+         return sucess;
+         
          
          
          
