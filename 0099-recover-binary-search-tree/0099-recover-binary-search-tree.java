@@ -2,58 +2,80 @@
 class Solution {
     public void recoverTree(TreeNode root) {
         
-        ArrayList<Integer> ans = new ArrayList<>();
+        ArrayList<TreeNode> ans = new ArrayList<>();
         
         inorder(root , ans);
         
-      
+      int prev1 = 0;
+        int pre1 = 0;
         
-        Collections.sort(ans);
+        int count1 = 0;
+        int count2 = 0;
         
-        inorder1(root , ans);
+        int prev2 = 0;
+        int pre2 = 0;
+        
+       for(int i = 0; i < ans.size() - 1; i++){
+           
+           if(ans.get(i).val > ans.get(i + 1).val){
+               
+               if(count1 == 0){
+                   
+                   prev1 = i;
+                   pre1 = i+1;
+                   count1 = 1;
+               }else{
+                   
+                   prev2 =i;
+                   pre2 = i+1;
+                   count2 = 1;
+               }
+               
+               
+           }
+           
+           
+           
+           
+       }
+        
+ 
+    if(count2 == 0){
+        
+        int temp = ans.get(prev1).val;
+        ans.get(prev1).val = ans.get(pre1).val;
+        ans.get(pre1).val = temp;
+        
+    }else{
+        
+        
+          int temp = ans.get(prev1).val;
+        ans.get(prev1).val = ans.get(pre2).val;
+        ans.get(pre2).val = temp;
+        
         
         
     }
-   int i = 0;
     
-     public void inorder1(TreeNode root , ArrayList<Integer> ans){
-        
-        if(root == null){
-            return;
-        }
-        
-        inorder1(root.left , ans);
-        
-       root.val = ans.get(i);
-         i++;
-        
-        inorder1(root.right , ans);
-        
-        
-        
-        
+    
+    
+    
+    
+    
     }
     
     
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    public void inorder(TreeNode root , ArrayList<Integer> ans){
+    public void inorder(TreeNode root , ArrayList<TreeNode> ans){
         
         if(root == null){
             return;
         }
         
         inorder(root.left , ans);
-        ans.add(root.val);
+        ans.add(root);
         
         inorder(root.right , ans);
         
