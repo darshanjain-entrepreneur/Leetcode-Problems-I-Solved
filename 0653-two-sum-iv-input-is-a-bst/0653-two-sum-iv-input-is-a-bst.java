@@ -1,49 +1,100 @@
 
+public class Bstiterator{
+    
+    Stack<TreeNode> st =new Stack<>();
+    boolean reverse = true;
+    
+    public Bstiterator(TreeNode root , boolean reverse){
+        
+        this.reverse = reverse;
+        pushall(root);
+    }
+    
+    public boolean hasnext(){
+        return !st.isEmpty();
+    }
+    
+    public int next(){
+        
+        TreeNode temp = st.pop();
+        if(reverse == false){
+            
+            pushall(temp.right);
+        }else{
+            pushall(temp.left);
+        }
+        
+        return temp.val;
+        
+    }
+    
+    
+    public void pushall(TreeNode root){
+        
+        
+        while(root != null){
+            
+            
+            st.add(root);
+            if(reverse == true){
+                root = root.right;
+            }else{
+                root = root.left;
+            }
+        }
+    }
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 class Solution {
     public boolean findTarget(TreeNode root, int k) {
         
+        
         if(root == null){
             return false;
         }
         
-        ArrayList<Integer> ans = new ArrayList<>();
         
-        findans(root , ans);
+        Bstiterator l1 = new Bstiterator(root , false);
+        Bstiterator l2 = new Bstiterator(root , true);
         
-        if(ans.size() == 0 || ans.size() == 1){
-            return false;
-        }
+        int i = l1.next();
+        int j = l2.next();
         
-        int start = 0;
-        int end = ans.size() - 1;
-        
-        while(start < end){
-            
-            if(ans.get(start) + ans.get(end) == k){
+        while(i < j){
+            if(i + j == k){
                 return true;
-            }else if(ans.get(start) + ans.get(end) > k){
-                
-                end = end-1;
             }else{
                 
-                start = start + 1;
+                if(i + j  < k){
+                    i = l1.next();
+                }else{
+                    j = l2.next();
+                }
             }
+            
         }
+        
+        
+        
+        
         
         return false;
-    }
-    
-    public void findans(TreeNode root , ArrayList<Integer> ans){
-        
-        if(root == null){
-            return;
-        }
-        
-        findans(root.left , ans);
-        ans.add(root.val);
-        findans(root.right , ans);
-        
         
     }
-    
 }
