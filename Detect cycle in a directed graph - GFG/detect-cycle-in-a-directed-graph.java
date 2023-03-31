@@ -32,25 +32,43 @@ class DriverClass {
 /*Complete the function below*/
 
 class Solution {
-   
-   
-   public boolean dfs(int node ,ArrayList<ArrayList<Integer>> adj , int vis[] ){
-       
-       
-       vis[node] = 2;
-       
+    // Function to detect cycle in a directed graph.
+    public boolean isCyclic(int V, ArrayList<ArrayList<Integer>> adj) {
       
-      for(Integer it : adj.get(node)){
+      
+      int indegree[] = new int[V];
+      
+      for(int i = 0; i < V; i++){
           
-          if(vis[it] == 0){
+          for(Integer it : adj.get(i)){
               
-              if(dfs(it , adj , vis)){
-                  return true;
-              }
-          }else{
+              indegree[it]++;
+          }
+          
+      }
+      Queue<Integer> q = new LinkedList<>();
+      
+      for(int i = 0; i < V; i++){
+          
+          if(indegree[i] == 0){
+              q.add(i);
+          }
+          
+          
+      }
+      
+      
+      while(!q.isEmpty()){
+          
+          int node = q.poll();
+          
+          for(Integer it : adj.get(node)){
               
-              if(vis[it] == 2){
-                  return true;
+              indegree[it]--;
+              
+              if(indegree[it] == 0){
+                  
+                  q.add(it);
               }
               
               
@@ -58,51 +76,25 @@ class Solution {
           
           
           
+          
+          
+          
+          
       }
-       
-       
-       vis[node] = vis[node] - 1;
-       
-       return false;
-       
-       
-       
-   }
-   
-   
-   
-   
-   
-   
-   
-   
-    public boolean isCyclic(int V, ArrayList<ArrayList<Integer>> adj) {
-        
-        int vis[] =new int[V];
-        
-        for(int  i = 0; i < V;i++){
-            
-            if(vis[i] == 0 ){
-                
-               if( dfs(i , adj , vis) == true){
-                   return true;
-               }
-            }
-            
-            
-            
-        }
-        
-        
-        
-        
-        
-        
-        return false;
-        
-        
-        
-        
-        
+      
+      
+      
+      for(int i = 0; i< V; i++){
+          
+          if(indegree[i] > 0){
+              return true;
+          }
+      }
+      
+      
+      
+      
+      return false;
+      
     }
 }
