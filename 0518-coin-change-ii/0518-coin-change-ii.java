@@ -14,10 +14,6 @@ class Solution {
     
     public int find(int i , int amount , int coins[] , int dp[][]){
         
-        if(amount == 0){
-            
-            return 1;
-        }
         
         if(i == 0){
           if(amount % coins[i] == 0){
