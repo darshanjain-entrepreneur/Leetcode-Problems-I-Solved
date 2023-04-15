@@ -72,12 +72,33 @@ class Solution{
     {
 
    int dp[][] = new int[N][W + 1];
-   for(int rows[] : dp){
-       Arrays.fill(rows , -1);
+  
+   for(int w = 0; w <= W; w++){
+       
+       dp[0][w] = (int)(w/wt[0])*val[0];
    }
-   
-   return find( N - 1 , val , wt , W , dp , N);
+ 
+for(int i = 1; i < N; i++){
+    
+    for(int j = 0; j <= W; j++){
+        
+        int notpick = dp[i-1][j];
+        
+        int pick = -(int)1e9;
+        
+        if(wt[i] <= j){
+            
+            pick = val[i] + dp[i][j- wt[i]];
+        }
+        
+        dp[i][j] = Math.max(pick , notpick);
+    }
+}
 
+
+
+
+return dp[N-1][W];
 
     }
 }
