@@ -2,12 +2,13 @@ class Solution {
     public int change(int amount, int[] coins) {
         
         int n = coins.length;
-        int dp[][] = new int[coins.length ][amount + 1];
+        int prev[] =new int[amount + 1];
+        int cur[] = new int[amount + 1];
         
       for(int j = 0; j <= amount; j++){
           
           if(j %coins[0] == 0){
-              dp[0][j] = 1;
+              prev[j] = 1;
           }
       }
         
@@ -15,17 +16,18 @@ class Solution {
             
             for(int j = 0; j <= amount; j++){
                 
-                int notpick = dp[i-1][j];
+                int notpick = prev[j];
                 int pick = 0;
                 
                 if(coins[i] <= j){
-                    pick = dp[i][j - coins[i]];
+                    pick = cur[j - coins[i]];
                 }
-                dp[i][j] = pick + notpick;
+                cur[j] = pick + notpick;
             }
+            prev = cur;
         }
         
-       return dp[n-1][amount]; 
+       return prev[amount]; 
         
     }
     
