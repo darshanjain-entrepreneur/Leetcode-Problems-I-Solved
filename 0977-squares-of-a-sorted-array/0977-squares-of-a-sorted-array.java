@@ -1,7 +1,8 @@
 class Solution {
     public int[] sortedSquares(int[] nums) {
+ 
         
-        for(int i = 0; i < nums.length; i++){
+          for(int i = 0; i < nums.length; i++){
             
          
             int temp = nums[i];
@@ -12,6 +13,14 @@ class Solution {
         
         Arrays.sort(nums);
         return nums;
+        
+        
+        
+        
+        
+        
+        
+    
         
     }
 }
