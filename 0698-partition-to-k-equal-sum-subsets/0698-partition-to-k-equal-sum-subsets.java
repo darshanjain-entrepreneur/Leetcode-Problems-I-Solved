@@ -37,7 +37,7 @@ class Solution {
     public boolean solve(int start , int cursum , int nums[] , int target , int k , boolean vis[]){
         
         
-        if(k == 0){
+        if(k == 1){
             return true;
         }
         
