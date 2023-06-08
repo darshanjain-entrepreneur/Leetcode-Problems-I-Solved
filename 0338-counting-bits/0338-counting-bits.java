@@ -7,7 +7,7 @@ class Solution {
         for(int i = 0; i <= n; i++){
             
             
-            int no = find(i );
+            int no = find(i , dp);
             ans[i] = no;
             
             
@@ -19,23 +19,27 @@ class Solution {
         
     }
     
-    public int find(int i ){
+    public int find(int i , int dp[] ){
         
         if(i  <= 1){
             return i;
+        }
+        
+        if(dp[i] != -1){
+            return dp[i];
         }
         
         int ans = 0;
        
         if(i % 2 == 0){
             
-            ans =  find(i/2 );
+            ans =  find(i/2 , dp);
         }else{
             
-            ans = 1 +  find(i/2);
+            ans = 1 +  find(i/2 , dp);
         }
         
-       return ans;
+       return dp[i] = ans;
         
     }
 }
