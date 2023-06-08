@@ -2,11 +2,12 @@ class Solution {
     public int[] countBits(int n) {
         
         int ans[] = new int[n+1];
-        
+        int dp[] = new int[n+2];
+        Arrays.fill(dp, -1);
         for(int i = 0; i <= n; i++){
             
             
-            int no = find(i , 0);
+            int no = find(i );
             ans[i] = no;
             
             
@@ -18,23 +19,23 @@ class Solution {
         
     }
     
-    public int find(int i , int count){
+    public int find(int i ){
         
         if(i  <= 1){
             return i;
         }
         
-        
+        int ans = 0;
        
         if(i % 2 == 0){
             
-            return find(i/2 , count);
+            ans =  find(i/2 );
         }else{
             
-            return 1 +  find(i/2 , count);
+            ans = 1 +  find(i/2);
         }
         
-       
+       return ans;
         
     }
 }
