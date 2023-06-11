@@ -1,78 +1,36 @@
 class Solution {
     public boolean wordBreak(String s, List<String> wordDict) {
-        
-        int n = s.length();
-        
-        boolean ans[] = new boolean[1];
-        Boolean  dp[][] = new Boolean[n + 1][n + 1];
-        
-     
-        
-        
-        return find("" , 0 , s , wordDict , ans , dp );
+        HashMap<String,Integer>h1=new HashMap<>();
+        for(String str:wordDict){
+            h1.put(str,1);
+        }
+        int n=s.length();
+        int dp[]=new int[n+1];
+        Arrays.fill(dp,-1);
+        return helper(s,0,h1,dp)==1;
     }
-    
-    
-    public boolean find( String p , int i , String s ,List<String> d , boolean ans[] , Boolean dp[][] ){
-        
-        if(i == s.length()){
-            
-         
-            
-            if(d.contains(p)){
-                
-                ans[0] = true;
-                return true;
-                
-                
+    int  helper(String s,int i,HashMap<String,Integer>h1,int dp[]){
+        if(i==s.length()){
+            return 1;
+        }
+        if(dp[i]!=-1){
+            return dp[i];
+        }
+        for(int j=i;j<s.length();j++){
+            if(isfound(s.substring(i,j+1),h1)){
+               int ans= helper(s,j+1,h1,dp);
+               dp[i]=ans;
+               if(ans==1){
+                   return 1;
+               }
             }
-            
-            
-          
-            return false;
-            
         }
-        
-        
-          if(dp[i - p.length() + 1][i] != null){
-            
-            return dp[i - p.length() + 1][i];
-        }
-        
-        
-        
-        if(d.contains(p)){
-            
-             find("" , i , s , d , ans , dp);
-            
-            if(ans[0] == true){
-                
-                return true;
-            }
-            
-            
-        }
-        
-        
-      
-        
-        
-        char ch = s.charAt(i);
-        
-        return dp[i - p.length() + 1][i] =  find(p +ch , i+1 , s , d, ans , dp);
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        return 0;
     }
-    
-    
-    
-    
+    boolean isfound(String s,HashMap<String,Integer>h1){
+        if(h1.containsKey(s)){
+            return true;
+        }
+        return false;
+    }
 }
