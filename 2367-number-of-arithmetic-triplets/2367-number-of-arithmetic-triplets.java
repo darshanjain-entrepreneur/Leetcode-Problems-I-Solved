@@ -24,11 +24,7 @@ class Solution {
             
             if(map.containsKey(first) && map.containsKey(second)){
                 
-                if(map.get(first) > i && map.get(second) > map.get(first)){
-                    
-                    count++;
-                }
-                
+              count++;
                 
             }
             
