@@ -3,15 +3,22 @@ class Solution {
         
         int n = cost.length;
         
-        int dp[] = new int[n+1];
+     int prev1 = cost[1];
+        int cur = 0;
+        int prev2 = cost[0];
         
-        Arrays.fill(dp , -1);
-     int ans1 =    findmin(n-1 , cost,n , dp);
         
-        int ans2 = findmin(n-2 , cost,n , dp);
-        
-        return Math.min(ans1 , ans2);
-        
+        for(int i= 2; i < n; i++){
+            
+            
+             cur = cost[i] + Math.min(prev1 , prev2);
+            
+            prev2 = prev1;
+            prev1 = cur;
+            
+        }
+      
+               return Math.min(prev1 , prev2);
         
     }
     
