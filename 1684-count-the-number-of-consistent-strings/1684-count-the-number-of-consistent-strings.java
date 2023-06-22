@@ -2,13 +2,14 @@ class Solution {
     public int countConsistentStrings(String allowed, String[] words) {
         
         
-        HashMap<Character , Integer> map = new HashMap<>();
+       int arr[] = new int[26];
         int count =0;
         
         
       for(int i =0; i < allowed.length(); i++){
           
-          map.put(allowed.charAt(i) , 1);
+              int pp = (int)(allowed.charAt(i) -'a');
+          arr[pp] = 1;
           
           }
         
@@ -19,7 +20,9 @@ class Solution {
             int h = 0;
             for(int i = 0; i < s.length(); i++){
                 
-               if(map.containsKey(s.charAt(i))){
+                int k = (int)(s.charAt(i)-'a');
+                
+               if(arr[k] == 1){
                    
                    
                }else{
