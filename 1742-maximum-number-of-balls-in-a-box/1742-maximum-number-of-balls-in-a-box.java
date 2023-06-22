@@ -3,6 +3,8 @@ class Solution {
         
       TreeMap<Integer , Integer> map = new TreeMap<>();
         
+        int max = 0;
+        
         for(int i = lowLimit; i <= highLimit; i++){
             
             
@@ -25,25 +27,16 @@ class Solution {
             }
           
             
-            
+            max = Math.max(map.get(sum) , max);
             
             
             
             
         }
         
-        int max = 0;
-        
-        for(int i : map.values()){
 
- max = Math.max(max , i);
-}
-
-   
         
-    return max;
-        
-        
+        return max;
         
         
         
