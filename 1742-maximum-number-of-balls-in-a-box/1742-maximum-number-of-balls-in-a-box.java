@@ -17,17 +17,20 @@ class Solution {
                 
                 
             }
+            int g = 0;
             
             if(map.containsKey(sum)){
+             g=   map.get(sum)+1;
                 
-                map.put(sum , map.get(sum)+1);
+                map.put(sum , g);
             }else{
                 
+                g=1;
                 map.put(sum , 1);
             }
           
             
-            max = Math.max(map.get(sum) , max);
+   max = Math.max(max , g);
             
             
             
