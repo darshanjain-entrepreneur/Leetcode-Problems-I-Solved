@@ -11,45 +11,68 @@
 class Solution {
     public boolean isPalindrome(ListNode head) {
         
+        if(head.next == null){
+            return true;
+        }
         
-    int n = 0;
         ListNode tail = head;
         
-        while(head != null){
-            
-
-            n++;
-            head = head.next;
-            
-        }
+        StringBuilder b = new StringBuilder();
         
-        int nums[] = new int[n];
-        int i = 0;
         while(tail != null){
             
-            nums[i] = tail.val;
+            b.append(tail.val);
             tail = tail.next;
-            i++;
-            
         }
         
-      int start = 0;
-        int end = nums.length-1;
+             StringBuilder c = new StringBuilder();
         
-        while(start <=end){
+        ListNode tail2 = reverse(head);
+        
+        while(tail2 != null){
             
-            if(nums[start]!= nums[end]){
-                
-                return false;
+            c.append(tail2.val);
+            tail2 = tail2.next;
+        }
+     System.out.println(c);
+        System.out.println(b);
+        String d = c.toString();
+        String e = b.toString();
+   
+        
+        if(d.equals(e)){
+            return true;
+        }else{
+            
+            return false;
+        }
+        
+        
+    }
+    
+    public ListNode reverse(ListNode head){
+        
+        
+        ListNode prev = null;
+        ListNode pre = head;
+        ListNode fut = head.next;
+        
+        
+        while(pre != null){
+            
+            pre.next = prev;
+            prev =  pre;
+            pre = fut;
+            if(fut != null){
+                fut = fut.next;
             }
-            start++;
-            end--;
             
             
             
             
         }
         
-        return true;
+        return prev;
+        
     }
 }
