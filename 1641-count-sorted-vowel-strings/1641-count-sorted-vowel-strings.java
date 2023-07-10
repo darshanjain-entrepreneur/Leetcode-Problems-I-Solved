@@ -1,48 +1,30 @@
 class Solution {
-    
-    public int count(int n , char ch1 , char ch[]){
+    public int countVowelStrings(int n) {
+        int dp[][] = new int[n+1][6];
         
-       if(n==0){
-           return 1;
-           
-       }
         
-      int temp = 0;
-        
-        for(char chh : ch){
+        for(int i = 1; i <= n; i++){
             
-            if(chh >= ch1){
+            for(int j = 1; j <6; j++){
                 
-                temp = temp + count(n-1 , chh , ch);
+                if(i <= 1){
+                    
+                  dp[i][j] = 1 + dp[i][j-1];  
+                    
+                }else{
+                    
+                    dp[i][j] = dp[i-1][j] + dp[i][j-1];
+                }
+                
+                
             }
             
             
-        }
-        
-        
-        return temp;
-    }
-    
-    
-    public int countVowelStrings(int n) {
-        
-        int ans = 0;
-        char ch[] = {'a' , 'e' , 'i' , 'o' , 'u'};
-        
-        for(char ch1 : ch){
-            
-            
-            ans = ans + count(n-1 , ch1 , ch);
-            
-            
-         
             
         }
         
         
-        
-          return ans; 
-        
+       return dp[n][5]; 
         
     }
 }
