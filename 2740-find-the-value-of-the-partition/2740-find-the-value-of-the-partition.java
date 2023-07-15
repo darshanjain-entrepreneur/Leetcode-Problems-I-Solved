@@ -11,7 +11,7 @@ class Solution {
         while(start < nums.length-1 && end < nums.length){
             
             
-            min = Math.min(min , Math.abs(nums[end] - nums[start]));
+            min = Math.min(min ,nums[end] - nums[start]);
             
             start++;
             end++;
