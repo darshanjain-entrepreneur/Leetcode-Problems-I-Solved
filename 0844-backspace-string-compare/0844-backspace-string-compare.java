@@ -2,58 +2,66 @@ class Solution {
     public boolean backspaceCompare(String s, String t) {
         
         
-        StringBuilder b1 = new StringBuilder();
+    int i = s.length()-1;
+        int j = t.length()-1;
         
-        StringBuilder b2 = new StringBuilder();
-        
-        for(int i=0; i < s.length(); i++){
+        while(i >= 0 || j >= 0){
             
-            if(s.charAt(i) == '#'&&b1.length()> 0){
+            int count = 0;
+            while(i >= 0 && ( count > 0 || s.charAt(i) == '#')){
                 
-                b1.delete(b1.length()-1 , b1.length());
-                
-            }else{
-                
-                if(s.charAt(i) != '#'){
-                    b1.append(s.charAt(i));
+                if(s.charAt(i) == '#'){
+                    count++;
+                }else{
+                    count--;
                 }
                 
-                
+                i--;
             }
             
-            
-            
-        }
-        
-          for(int i=0; i < t.length(); i++){
-            
-            if(t.charAt(i) == '#'&&b2.length()> 0){
+            count = 0;
+             while(j >= 0 && ( count > 0 || t.charAt(j) == '#')){
                 
-                b2.delete(b2.length()-1 , b2.length());
-                
-            }else{
-                
-                if(t.charAt(i) != '#'){
-                    b2.append(t.charAt(i));
+                if(t.charAt(j) == '#'){
+                    count++;
+                }else{
+                    count--;
                 }
                 
-                
+                j--;
             }
             
+           if(i >=0 && j >= 0){
+               
+               if(s.charAt(i) != t.charAt(j)){
+                   return false;
+               }
+               i--;
+               j--;
+               
+           }else{
+               
+               if(i >=0||j>=0){
+                   return false;
+               }
+               
+               
+           }
+            
+            
+            
+            
             
             
         }
         
-      
-        String c1 = b1.toString();
-        String c2 = b2.toString();
-        
-        if(c1.equals(c2)){
-            return true;
-        }
         
         
-        return false;
+        
+        
+        
+        return true;
+        
         
     }
 }
