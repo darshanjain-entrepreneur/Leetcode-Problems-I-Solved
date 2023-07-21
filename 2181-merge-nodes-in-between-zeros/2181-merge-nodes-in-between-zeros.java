@@ -2,34 +2,30 @@
 class Solution {
     public ListNode mergeNodes(ListNode head) {
         
-        ArrayList<Integer> ll = new ArrayList<>();
+        ListNode head1 = new ListNode(0);
+        ListNode tail = head1;
         int sum = 0;
         
-        while(head != null){
+    while(head != null){
+        
+        if(head.val == 0){
             
-            if(head.val == 0){
-                if(sum != 0){
-                    ll.add(sum);
-                }
-                sum = 0;
-                
-            }else{
-                sum = sum + head.val;
+            if(sum!= 0){
+                ListNode temp = new ListNode(sum);
+                tail.next = temp;
+                tail = tail.next;
             }
+            sum = 0;
+        }else{
             
-            head = head.next;
+            sum = sum + head.val;
         }
         
-        ListNode head1 = new ListNode(ll.get(0));
-        ListNode tail = head1;
+        head = head.next;
         
-        for(int i = 1; i < ll.size(); i++){
-            
-            ListNode temp = new ListNode(ll.get(i));
-            tail.next = temp;
-            tail = tail.next;
-        }
+    }
         
-        return head1;
+        return head1.next;
+        
     }
 }
