@@ -1,21 +1,34 @@
 
 class Solution {
 
-    ArrayList<Integer> ll;
+ListNode head;
     
     public Solution(ListNode head) {
-        ll = new ArrayList<>();
-        while(head != null){
-            
-            ll.add(head.val);
-            head = head.next;
-        }
+      this.head = head;
         
     }
     
     public int getRandom() {
         
-        return ll.get((int)(Math.random()*(ll.size())));
+        ListNode cur = head;
+        int res = -1;
+        
+        for(int i = 1; cur != null; i++){
+            
+           if(random(i) == i-1){
+               res = cur.val;
+           } 
+            cur = cur.next;
+        }
+        
+        return res;
+    
+    }
+    
+    public int random(int i){
+        
+        int a = (int)(Math.random()*i);
+        return a;
     }
 }
 
