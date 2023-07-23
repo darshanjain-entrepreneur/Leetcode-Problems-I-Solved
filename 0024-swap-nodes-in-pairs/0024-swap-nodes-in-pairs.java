@@ -6,22 +6,43 @@ class Solution {
             return head;
         }
         ListNode start = head;
+        ListNode pre = head;
+        ListNode prev = null;
+        ListNode fut = head.next;
         
-        while( head != null && head.next != null){
+        
+        while( pre != null && fut != null ){
             
-            int val1 = head.val;
-            int val2 = head.next.val;
-            head.val =val2;
-            head.next.val = val1;
-            
-            head = head.next.next;
+         if(prev == null){
+             start = fut;
+             prev = pre;
+             pre.next = fut.next;
+             fut.next = pre;
+           pre = pre.next;
+              if(pre != null){
+               fut = pre.next;
+           }
+             
+             
+         }else{
+             prev.next = fut;
+              prev = pre;
+              pre.next = fut.next;
+             fut.next = pre;
+           pre = pre.next;
+           if(pre != null){
+               fut = pre.next;
+           }
+             
+             
+         }
             
             
             
         }
         
         
-        return  start;
+    return start;
         
         
     }
