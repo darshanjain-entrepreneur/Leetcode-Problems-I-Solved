@@ -1,29 +1,24 @@
-class Solution {
-    
- HashMap<Integer, ArrayList<Integer>> ll = new HashMap<>();
+public class Solution {
+
+    int[] nums;
+    Random rnd;
 
     public Solution(int[] nums) {
-        
-      for(int i = 0;i < nums.length; i++){
-          
-          if(ll.containsKey(nums[i])){
-              ll.get(nums[i]).add(i);
-          }else{
-              
-              ll.put(nums[i] , new ArrayList<>());
-              ll.get(nums[i]).add(i);
-          }
-          
-      }
-        
-        
+        this.nums = nums;
+        this.rnd = new Random();
     }
     
     public int pick(int target) {
-     int index = (int)(Math.random()*(ll.get(target).size()));
+        int result = -1;
+        int count = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != target)
+                continue;
+            if (rnd.nextInt(++count) == 0)
+                result = i;
+        }
         
-        return ll.get(target).get(index);
+        return result;
     }
-     
 }
 
