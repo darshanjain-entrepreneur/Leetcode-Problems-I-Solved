@@ -9,7 +9,7 @@ class Solution {
             }
         }
         
-    int dp[][] = new int[nums.length][10000];
+    int dp[][] = new int[nums.length][30000];
         
         for(int row[] : dp){
             Arrays.fill(row , -1);
