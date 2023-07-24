@@ -9,8 +9,14 @@ class Solution {
             }
         }
         
+    int dp[][] = new int[nums.length][10000];
         
-       return find(nums.length-1 , target , nums); 
+        for(int row[] : dp){
+            Arrays.fill(row , -1);
+        }
+        
+        
+       return find(nums.length-1 , target , nums , dp); 
         
         
         
@@ -19,7 +25,7 @@ class Solution {
         
     }
     
-    public int find(int i , int target ,int nums[] ){
+    public int find(int i , int target ,int nums[] , int dp[][] ){
         
        if(i == 0){
            
@@ -35,9 +41,34 @@ class Solution {
           return 0; 
        }
         
+         if(target >= 0){
+         
+             if(dp[i][target] != -1){
+                 return dp[i][target];
+             }
+             
+             
+        }else{
+            
+        int a = -target +2001;
+          if(dp[i][a] != -1){
+              return dp[i][a];
+          }
+        }
+     
         
-        int positive = find(i-1 , target+nums[i] , nums);
-        int negative = find(i-1 , target-nums[i] , nums);
+        
+        int positive = find(i-1 , target+nums[i] , nums , dp);
+        int negative = find(i-1 , target-nums[i] , nums , dp);
+        
+        
+        if(target >= 0){
+            dp[i][target] = positive+negative;
+        }else{
+            
+        int a = -target +2001;
+            dp[i][a] = positive+negative;
+        }
         
         return positive+negative;
       
