@@ -9,14 +9,12 @@ class Solution {
             }
         }
         
-    int dp[][] = new int[nums.length][30000];
+ 
         
-        for(int row[] : dp){
-            Arrays.fill(row , -1);
-        }
+      HashMap<Integer , HashMap<Integer , Integer>> map = new HashMap<>();
         
         
-       return find(nums.length-1 , target , nums , dp); 
+       return find(nums.length-1 , target , nums , map); 
         
         
         
@@ -25,7 +23,7 @@ class Solution {
         
     }
     
-    public int find(int i , int target ,int nums[] , int dp[][] ){
+    public int find(int i , int target ,int nums[] , HashMap<Integer , HashMap<Integer , Integer>> map  ){
         
        if(i == 0){
            
@@ -41,34 +39,47 @@ class Solution {
           return 0; 
        }
         
-         if(target >= 0){
-         
-             if(dp[i][target] != -1){
-                 return dp[i][target];
-             }
-             
-             
-        }else{
-            
-        int a = -target +2001;
-          if(dp[i][a] != -1){
-              return dp[i][a];
-          }
-        }
-     
+        
+       if(map.containsKey(i)){
+           
+           if(map.get(i).containsKey(target)){
+               
+               return map.get(i).get(target);
+           }
+           
+           
+       }
+        
+   
         
         
-        int positive = find(i-1 , target+nums[i] , nums , dp);
-        int negative = find(i-1 , target-nums[i] , nums , dp);
+        int positive = find(i-1 , target+nums[i] , nums , map);
+        int negative = find(i-1 , target-nums[i] , nums , map);
         
         
-        if(target >= 0){
-            dp[i][target] = positive+negative;
-        }else{
-            
-        int a = -target +2001;
-            dp[i][a] = positive+negative;
-        }
+       if(!map.containsKey(i)){
+           
+           map.put(i , new HashMap<Integer , Integer>());
+           
+           map.get(i).put(target  , positive+negative);
+           
+       }else{
+           
+           if(map.get(i).containsKey(target)){
+               
+               map.get(i).put(target , positive+negative);
+               
+           }else{
+               
+               map.get(i).put(target , positive+negative);
+           }
+           
+           
+           
+       }
+           
+           
+           
         
         return positive+negative;
       
