@@ -1,40 +1,95 @@
 class Solution {
     public int[] twoSum(int[] nums, int target) {
         
-        
-    HashMap<Integer ,ArrayList<Integer>> map = new HashMap<>();
-        
-        
-   int ans[] = new int[2];
-        
+ int ans[] = new int[2];
         for(int i = 0; i < nums.length; i++){
-           
             
-            if(!map.containsKey(nums[i])){
-                 map.put(nums[i] , new ArrayList<Integer>());
-            }
-            map.get(nums[i]).add(i);
+            int t = target-nums[i];
+            int count = 0;
+            int start = 0;
+            int end = nums.length-1;
             
-        }
-        
-    
-        for(int i : nums){
-            
-            if(map.containsKey(target -i)){
+         if(t < nums[i]){
+             
+             start = 0;
+             end = i-1;
+             
+             while(start <= end){
+                 
+                int mid = start + (end-start)/2;
+                 
+                 if(nums[mid] == t){
+                     ans[0] = mid+1;
+                     ans[1] = i+1;
+                     count =1;
+                     break;
+                 }else if(nums[mid] < t){
+                     
+                    start = mid+1;
+                     
+                     
+                 }else{
+                     
+                     end = mid-1;
+                 }
+                 
+                 
+                 
+             }
+             
+             
+             
+         }else if(t == nums[i]){
+             
+             if(i+1 < nums.length && nums[i+1] == t){
+                 
+                 ans[0] = i+1;
+                 ans[1] = i+2;
+                 count = 1;
                 
-                if(i != target-i){
-                    
-                    ans[0] = map.get(i).get(0)+1;
-                    ans[1] = map.get(target-i).get(0)+1;
-                    break;
-                }else{
-                    
-                    ans[0] = map.get(i).get(0)+1;
-                    ans[1] = map.get(i).get(1)+1;
-                    break;
-                    
-                }
+             }else if(i-1 >= 0 && nums[i-1] == t){
+                  ans[0] = i-1+1;
+                 ans[1] = i+1;
+                 count = 1;
+             }
+             
+             
+         }else{
+             
+             start = i+1;
+             end= nums.length-1;
+                while(start <= end){
+                 
+                int mid = start + (end-start)/2;
+                 
+                 if(nums[mid] == t){
+                     ans[0] = i+1;
+                     ans[1] = mid+1;
+                     count =1;
+                     break;
+                 }else if(nums[mid] < t){
+                     
+                    start = mid+1;
+                     
+                     
+                 }else{
+                     
+                     end = mid-1;
+                 }
+                 
+                 
+                 
+             }
+             
+             
+             
+         }
+            
+            
+            if(count == 1){
+                break;
             }
+            
             
         }
         
