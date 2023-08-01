@@ -1,41 +1,35 @@
 class Solution {
     public List<List<Integer>> combine(int n, int k) {
         
+        List<List<Integer>> ans = new ArrayList<>();
         
-        List<List<Integer>> result = new ArrayList<>();
-        
-        int ans = k;
-        
-        find(1 , n , k , new ArrayList<Integer>() , result , ans);
-        
-        return result;
+       findcomb(n , k , new ArrayList<>() , ans);
         
         
+        return ans;
     }
     
-    public void find(int i , int n , int k ,  ArrayList<Integer> ll , List<List<Integer>> result , int ans){
+    public void findcomb(int n , int k , List<Integer> ll ,  List<List<Integer>> ans ){
         
-        if(i> n && k > 0){
+        if(n <= 0 || ll.size() == k){
+            
+            if(ll.size() == k){
+                
+                ans.add(new ArrayList<>(ll));
+                
+            }
             
             return;
         }
         
-        if(k == 0){
-            
-        if(ll.size() == ans){
-            
-            result.add(new ArrayList<Integer>(ll));
-        }
-            return;
-            
-            
-        }
+        ll.add(n);
+        findcomb(n-1 , k , ll , ans);
         
-        ll.add(i);
-        find(i + 1 , n , k-1 , ll , result , ans);
+        ll.remove(ll.size() -1);
+        findcomb(n-1 , k , ll , ans);
         
-        ll.remove(ll.size() - 1);
-        find(i + 1 , n , k , ll , result , ans);
+        
+        
         
         
     }
