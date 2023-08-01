@@ -23,12 +23,11 @@ class Solution {
             int max = -1;
            for(int j = 0; j < arr.length; j++){
                
-              max =  Math.max(max , arr[j]);
+            max =    Math.max(max , arr[j]);
                
            }
             
             min = Math.min(max , min);
-            
             return;
         }
         
@@ -42,7 +41,9 @@ class Solution {
               findmax(i+1 , k , cookies , arr);
             
             arr[j] = arr[j] - cookies[i];
-            
+            if(arr[j] == 0){
+                break;
+            }
             
         }
         
