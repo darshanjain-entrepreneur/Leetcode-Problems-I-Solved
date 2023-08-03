@@ -6,7 +6,7 @@ class Solution {
         
         find(root , ll);
         
-        Collections.sort(ll);
+      
         
         int min = (int)1e9;
         
@@ -18,7 +18,7 @@ class Solution {
             
             
         }
-        System.out.println(ll);
+    
         
         return min;
     }
@@ -31,9 +31,10 @@ class Solution {
         }
         
         
-        ll.add(root.val);
+      
         
         find(root.left , ll);
+         ll.add(root.val);
         find(root.right , ll);
         
         
