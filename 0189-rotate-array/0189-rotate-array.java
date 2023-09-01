@@ -1,37 +1,53 @@
 class Solution {
-    public void rotate(int[] arr, int k) {
+    public void rotate(int[] nums, int k) {
         
-        int n = arr.length;
+       int n = nums.length;
+        if(n == 0 || k == 0){
+            return;
+        }
         
         k = k%n;
         
-        if(n == 1){
-            return;
-        }
+        int start = 0;
+        int end = nums.length-1;
         
-        if(k == 0){
+        while(start < end){
             
-            return;
-        }
-        
-       
-       ArrayList<Integer> ll = new ArrayList<>();
-        
-        int m = n - k;
-        for(int i = m; i < n; i++){
-            ll.add(arr[i]);
-        }
-        
-        for(int i = 0; i < m; i++){
+            int temp = nums[start];
+           nums[start] = nums[end];
+            nums[end] = temp;
             
-            ll.add(arr[i]);
+            start++;
+            end--;
         }
-      
         
-        for(int i = 0; i < n; i++){
+        
+        start = 0;
+        end = k-1;
+        while(start < end && end < nums.length && start < nums.length){
+           int temp = nums[start];
+           nums[start] = nums[end];
+            nums[end] = temp;
             
-            arr[i] = ll.get(i);
+            start++;
+            end--;  
+            
         }
+        
+        start = k;
+        end = n-1;
+        
+        while(start < end && end < nums.length && start < nums.length){
+            int temp = nums[start];
+           nums[start] = nums[end];
+            nums[end] = temp;
+            
+            start++;
+            end--;  
+            
+        }
+        
+        
         
     }
 }
