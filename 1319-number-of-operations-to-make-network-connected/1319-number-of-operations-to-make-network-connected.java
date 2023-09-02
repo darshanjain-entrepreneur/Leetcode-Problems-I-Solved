@@ -94,26 +94,7 @@ class Solution {
     
     
     
-    public void dfs(int node ,ArrayList<ArrayList<Integer>> adj , int visited[]){
-        
-        
-        
-        visited[node] = 1;
-        
-        for(Integer it : adj.get(node)){
-            
-            if(visited[it] == 0){
-                dfs(it , adj , visited);
-            }
-            
-        }
-        
-        
-        
-        
-        
-        
-    }
+ 
     
     
     
@@ -122,20 +103,14 @@ class Solution {
     
          DisJointSet s = new DisJointSet(n);
         int have = 0;
-        ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
-        
-        for(int i = 0; i < n; i++){
-            
-            adj.add(new ArrayList<Integer>());
-        }
+    
+    
         
         for(int i = 0; i < connect.length; i++ ){
             
             int u = connect[i][0];
             int v = connect[i][1];
       
-            adj.get(u).add(v);
-            adj.get(v).add(u);
             
             int uparent = s.findUPar(u);
                int vparent = s.findUPar(v);
@@ -152,20 +127,19 @@ class Solution {
         }
         
         
-        
-     int count = 0;
-        int visited[] = new int[n];
-        
+        int count = 0;
         
         for(int i = 0; i < n; i++){
             
-            if(visited[i] == 0){
-                
+            int pp = s.findUPar(i);
+            
+            if( pp == i){
                 count++;
-                dfs(i , adj , visited);
             }
             
+            
         }
+    
         
         
         
