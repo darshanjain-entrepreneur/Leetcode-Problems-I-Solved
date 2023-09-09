@@ -9,25 +9,24 @@ class Solution {
         
         for(int i : nums){
             
-            map.put(i , map.getOrDefault(i , 0) + 1);
+           if(map.containsKey(-i)){
+               
+               if(i < 0){
+                   ans = Math.max(ans , -i);
+               }else{
+                   
+                   ans = Math.max(ans , i);
+               }
+           }else{
+               
+               map.put(i , 0);
+           }
+            
+          
             
         }
-        
-        
-         
-        for(int i : nums){
-            
-          if(map.containsKey(-i)){
-              if(i < 0){
-                  ans = Math.max(ans , -i);
-              }else{
-                  ans = Math.max(ans , i);
-              }
-          }
-            
-        }
-         
         
         return ans;
+       
     }
 }
