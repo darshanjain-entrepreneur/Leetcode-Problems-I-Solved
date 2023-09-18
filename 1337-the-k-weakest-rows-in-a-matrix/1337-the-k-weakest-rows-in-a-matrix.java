@@ -1,15 +1,5 @@
 
-class Pair{
-    
-    int index;
-    int count;
-    public Pair(int index , int count){
-        this.index = index;
-        this.count = count;
-    }
-    
-    
-}
+
 
 
 
@@ -17,14 +7,15 @@ class Solution {
     public int[] kWeakestRows(int[][] mat, int k) {
         
         
-        PriorityQueue<Pair> pq = new PriorityQueue<>((a , b) -> {
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a , b) -> {
             
-            if(a.count != b.count){
-                return a.count - b.count;
-            }else{
-                
-                return a.index - b.index;
-            }
+          if(a[1] != b[1]){
+              
+              return a[1] - b[1];
+          }else{
+              
+              return a[0] - b[0];
+          }
             
         });
         
@@ -40,7 +31,7 @@ class Solution {
                 }
             }
             
-            pq.add(new Pair(i , count));
+            pq.add(new int[]{i, count});
             
         }
         
@@ -49,10 +40,13 @@ class Solution {
         
         while(!pq.isEmpty() && i < k ){
             
-            Pair pp = pq.poll();
-            arr[i] = pp.index;
-            
+        
+         int temp = pq.poll()[0];
+          arr[i] = temp;
             i++;
+          
+            
+           
         }
         
         return arr;
