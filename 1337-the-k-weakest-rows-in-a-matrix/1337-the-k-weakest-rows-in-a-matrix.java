@@ -4,52 +4,62 @@
 
 
 class Solution {
+    
+    public int binary(int[][] mat , int i){
+        
+        int start = 0;
+        int end = mat[i].length-1;
+        
+        while(start <= end){
+            
+            int mid = (end-start)/2 + start;
+            
+            if(mat[i][mid] == 1){
+                start = mid+1;
+                
+            }else{
+                
+                end = mid-1;
+            }
+            
+            
+            
+        }
+        
+        
+        return end+1;
+        
+        
+    }
+    
+    
     public int[] kWeakestRows(int[][] mat, int k) {
         
         
         PriorityQueue<int[]> pq = new PriorityQueue<>((a , b) -> {
-            
-          if(a[1] != b[1]){
-              
-              return a[1] - b[1];
-          }else{
-              
-              return a[0] - b[0];
-          }
-            
+            return a[0]!=b[0] ? b[0] - a[0] : b[1] - a[1];
         });
         
         
-        for(int i = 0; i < mat.length; i++){
+     for(int i = 0; i < mat.length; i++){
+         
+        int numones = binary(mat , i);
+         
+         pq.add(new int[]{numones , i});
+         
+         if(pq.size() > k){
+             pq.poll();
+         }
+         
+         
+         
+     }
+        
+        int ans[] = new int[k];
+        while(k > 0){
             
-            int count = 0;
-            for(int j = 0; j < mat[0].length; j++){
-                if(mat[i][j] == 0){
-                    break;
-                }else{
-                    count++;
-                }
-            }
-            
-            pq.add(new int[]{i, count});
-            
+            ans[--k] = pq.poll()[1];
         }
-        
-        int i = 0;
-        int arr[] = new int[k];
-        
-        while(!pq.isEmpty() && i < k ){
-            
-        
-         int temp = pq.poll()[0];
-          arr[i] = temp;
-            i++;
-          
-            
-           
-        }
-        
-        return arr;
-        
+        return ans;
     }
 }
