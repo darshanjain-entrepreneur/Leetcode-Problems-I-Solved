@@ -45,7 +45,7 @@ class Solution {
          
         int numones = binary(mat , i);
          
-         pq.add(new int[]{numones , i});
+         pq.offer(new int[]{numones , i});
          
          if(pq.size() > k){
              pq.poll();
