@@ -7,22 +7,30 @@ class Solution {
         int sol = 0;
         
         
-        for(int i = 0; i < s.length(); i++){
-            
-            int a = (int)(s.charAt(i) - 'a');
-            
-            sol = sol^a;
-            
-        }
-        
-        
         for(int i = 0; i < t.length(); i++){
             
-            int a = (int)(t.charAt(i) - 'a');
+       if(i == t.length()-1){
+           
+           int a = (t.charAt(i) - 'a');
+               sol = sol^a;
+       }else{
+           
+           
+           int b = (s.charAt(i) - 'a');
+           
+            int a = (t.charAt(i) - 'a');
+               sol = sol^a;  
+                   sol = sol^b;
+           
+       }
             
-            sol = sol^a;
+            
+        
             
         }
+        
+        
+        
         
         
         
