@@ -1,33 +1,54 @@
-public class NestedIterator implements Iterator<Integer> {
 
-    List<Integer> list;
-    int pointer;
-    int size;
+public class NestedIterator implements Iterator<Integer> {
+    
+    
+    Stack<NestedInteger> st;
 
     public NestedIterator(List<NestedInteger> nestedList) {
-        list = new ArrayList<Integer>();
-        for (NestedInteger ni : nestedList) {
-            if (ni.isInteger()) {
-                list.add(ni.getInteger());
-            } else {
-                NestedIterator itr = new NestedIterator(ni.getList());
-                list.addAll(itr.list);
-            }
+        int n = nestedList.size();
+        st = new Stack<>();
+        
+        for(int i = n-1; i>= 0; i--){
+            
+            st.add(nestedList.get(i));
         }
-        pointer = 0;
-        size = list.size();
     }
 
     @Override
     public Integer next() {
-        return list.get(pointer++);
+        
+        int num = st.peek().getInteger();
+        st.pop();
+        return num;
+        
     }
 
     @Override
     public boolean hasNext() {
-        if (pointer < size) {
-            return true;
+        
+        if(st.isEmpty()){
+            return false;
+        }
+        
+        while(!st.isEmpty()){
+            
+            NestedInteger cur = st.peek();
+            
+            if(cur.isInteger()){
+                return true;
+            }
+            
+            st.pop();
+            
+           List<NestedInteger> ll  = cur.getList();
+            for(int i = ll.size()-1; i>= 0; i--){
+                
+                st.add(ll.get(i));
+                
+            }
+            
         }
         return false;
     }
 }
+
