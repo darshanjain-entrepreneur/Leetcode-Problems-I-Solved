@@ -18,7 +18,7 @@ class Solution {
                   int m = end - start + 1;
                    
                    sum  = (sum  + (long)(m)*(long)(m+1)/(long)2)%mod;
-                   System.out.println(m + " second");
+                 
                end++;
                
            }else{
@@ -27,7 +27,7 @@ class Solution {
                    
                    int m = end - start;
                    
-                   System.out.println(m + "first");
+             
                    
                    sum  = (sum  + (long)(m)*(long)(m+1)/(long)2)%mod;
 
