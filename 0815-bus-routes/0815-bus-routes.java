@@ -1,37 +1,84 @@
 class Solution {
-    public int numBusesToDestination(int[][] routes, int S, int T) {
-       HashSet<Integer> visited = new HashSet<>();
-       Queue<Integer> q = new LinkedList<>();
-       HashMap<Integer, ArrayList<Integer>> map = new HashMap<>();
-       int ret = 0; 
+    public int numBusesToDestination(int[][] routes, int source, int target) {
         
-       if (S==T) return 0; 
+        if(source == target){
+            
+            return 0;
+        }
         
-       for(int i = 0; i < routes.length; i++){
+        
+        HashMap<Integer , List<Integer>> map = new HashMap<>();
+        
+        for(int i = 0; i < routes.length; i++){
+            
             for(int j = 0; j < routes[i].length; j++){
-                ArrayList<Integer> buses = map.getOrDefault(routes[i][j], new ArrayList<>());
-                buses.add(i);
-                map.put(routes[i][j], buses);                
-            }       
-        }
                 
-       q.offer(S); 
-       while (!q.isEmpty()) {
-           int len = q.size();
-           ret++;
-           for (int i = 0; i < len; i++) {
-               int cur = q.poll();
-               ArrayList<Integer> buses = map.get(cur);
-               for (int bus: buses) {
-                    if (visited.contains(bus)) continue;
-                    visited.add(bus);
-                    for (int j = 0; j < routes[bus].length; j++) {
-                        if (routes[bus][j] == T) return ret;
-                        q.offer(routes[bus][j]);  
-                   }
-               }
-           }
+                int a = routes[i][j];
+                
+                if(map.containsKey(a) == false){
+                    map.put(a , new ArrayList<>());
+                }
+                
+                map.get(a).add(i);
+            }
+            
         }
+        
+        
+        
+        Queue<Integer> q = new LinkedList<>();
+        
+        
+        boolean vis[] = new boolean[501];
+        
+        for(Integer it : map.get(source)){
+            
+            q.add(it);
+            vis[it] = true;
+            
+            
+        }
+        
+        
+        
+        int count = 1;
+        while(!q.isEmpty()){
+            
+            int size = q.size();
+            
+            while(size > 0){
+                
+                size--;
+                
+                int route = q.poll();
+                
+               for(int j = 0; j < routes[route].length; j++){
+                   
+                   
+                   if(routes[route][j] == target){
+                       
+                       return count;
+                   }
+                   
+                   for(Integer it : map.get(routes[route][j])){
+                       
+                       if(vis[it] == false){
+                           vis[it] = true;
+                           q.add(it);
+                       }
+                   }
+                   
+               }
+                
+           
+            }
+            
+                count++; 
+        }
+        
+        
+        
         return -1;
+        
     }
 }
