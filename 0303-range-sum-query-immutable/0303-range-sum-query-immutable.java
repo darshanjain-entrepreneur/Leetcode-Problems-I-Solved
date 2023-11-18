@@ -1,21 +1,21 @@
 class NumArray {
 
     
-    int arr[];
+
     int prefix[];
     public NumArray(int[] nums) {
         
         int n = nums.length;
-        arr = new int[n];
+    
         prefix = new int[n];
         for(int i = 0;  i< n; i++){
             
-            arr[i] = nums[i];
+        
             
             if(i == 0){
-                prefix[i] = arr[i];
+                prefix[i] = nums[i];
             }else{
-                prefix[i] = arr[i]+prefix[i-1];
+                prefix[i] = nums[i]+prefix[i-1];
             }
             
             
