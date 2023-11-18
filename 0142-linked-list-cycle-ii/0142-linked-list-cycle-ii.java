@@ -9,33 +9,40 @@ public class Solution {
         }
         
         
-        ListNode temp = head;
+      ListNode slow = head;
+        ListNode fast = head;
         
-        HashMap<ListNode , Integer> map = new HashMap<>();
         
         
-        while(temp != null){
+        while(fast.next != null && fast.next.next != null){
             
+            fast = fast.next.next;
+            slow = slow.next;
             
-            if(map.containsKey(temp)){
-                
-                return temp;
+            if(fast == null || slow == null){
+                return null;
+            }
+            if(fast == slow){
+                break;
             }
             
+        }
+        
+        if(fast != slow){
             
-            map.put(temp,1);
-            
-            temp = temp.next;
-            
-            
-            
+            return null;
         }
         
         
         
+        ListNode start = head;
         
-       return null; 
+        while(start != slow){
+            start = start.next;
+            slow = slow.next;
+        }
         
         
+        return start;
     }
 }
