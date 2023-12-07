@@ -4,7 +4,7 @@ class Solution {
         
         String ans = "";
         
-        for(int i = 0; i < num.length(); i++){
+        for(int i = num.length()-1; i >= 0; i--){
             
             
         int a = (int)(num.charAt(i) - '0');
@@ -12,6 +12,7 @@ class Solution {
             if(a%2 != 0){
                 
                 ans = num.substring(0 , i+1);
+                break;
             }
             
             
