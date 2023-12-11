@@ -1,29 +1,27 @@
 class Solution {
     public int findSpecialInteger(int[] arr) {
+        
+        int count = 0;
         int n = arr.length;
-        
-     int a = 25*n;
-        
-        a = a/100;
-        a++;
-        
-        int ans = -1;
-        int max = 0;
-        
-        HashMap<Integer , Integer> map = new HashMap<>();
-        
-        for(int i = 0; i < arr.length; i++){
-            
-            map.put(arr[i] , map.getOrDefault(arr[i] , 0)+1);
-           
-            if(map.get(arr[i]) > max){
-                max = map.get(arr[i]);
-                ans = arr[i];
+  
+        for(int i = 0; i < n; i++){
+      
+              if(i == 0){
+                  count++;
+              }else if(arr[i] == arr[i-1]){
+                  count++;
+              }else{
+                  
+                  count = 1;
+              }
+            if(count > arr.length/4){
+                return arr[i];
             }
-            
+        
         }
         
-        return ans;
-     
+        
+        return 1;
+        
     }
 }
