@@ -1,48 +1,85 @@
 class Solution {
     public int[][] imageSmoother(int[][] img) {
         
-        
         int n = img.length;
         
         int m = img[0].length;
         
+        int temp[] = new int[m];
         
-        int arr[][] = {
-            
-            {-1 , -1}, {-1 , 0} , {-1 , 1} , {0,0} , {0 , -1} , {0 , 1} , {1 , -1},
-            {1 , 0} , {1 , 1}
-            
-            
-        };
-        int ans[][] = new int[n][m];
+        int prevcorner = 0;
         
         for(int i = 0; i < n; i++){
             
             
             for(int j = 0; j < m; j++){
+                
+                
                 int sum = 0;
-                int count = 0;
-              
-                for(int temp[] : arr){
+            int count = 0;
+                
+                if(i+1 < n){
                     
+                    if(j -1 >= 0){
+                        sum = sum + img[i+1][j-1];count++;
+                    }
                     
-                    int row = temp[0]+i;
-                    int col = temp[1]+j;
+                    sum = sum + img[i+1][j];
+                    count++;
                     
-                    if(row >= 0 && row  < n && col >= 0 && col < m){
+                    if(j+1 < m){
                         
-                        sum = sum + img[row][col];
+                        sum = sum + img[i+1][j+1];
+                        count++;
+                    }
+                    
+                    
+                }
+                
+                
+                if(j+1 < m){
+                    sum  =sum + img[i][j+1];
+                    count++;
+                }
+                
+                sum = sum + img[i][j];
+                count++;
+                
+                if(j-1 >= 0){
+                    sum = sum + temp[j-1];
+                    count++;
+                }
+                
+                if(i-1 >= 0){
+                    
+                    
+                    if(j-1 >= 0){
+                        
+                        sum = sum + prevcorner;
+                        count++;
+                    }
+                    
+                    sum = sum + temp[j];
+                    count++;
+                    
+                    if(j+1 < m){
+                        sum = sum + temp[j+1];
                         count++;
                     }
                     
                 }
                 
-                ans[i][j] = sum/count;
+              if(i-1 >= 0){
+                    prevcorner = temp[j];
+              }
+                temp[j] = img[i][j];
+                
+                img[i][j] = sum/count;
+                
                 
             }
         }
         
-        
-        return ans;
+        return img;
     }
 }
